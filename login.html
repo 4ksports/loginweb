@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body>
     <div class="login-container">
@@ -36,6 +36,9 @@
             'username': username,
             'password': password
         };
+
+        // Log data ke konsol untuk memeriksa apakah data dikirim dengan benar
+        console.log('Mengirim data:', data);
 
         // Kirim permintaan POST menggunakan fetch
         fetch('https://script.google.com/macros/s/AKfycbzBK5jGIpbrLhmmPW7uUBq2OBqNqGzbBlZYE3AYgBDpBSRSLzVwqiJ2Gjs2PRQp6lxM/exec', {
