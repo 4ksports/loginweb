@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data dari Google Sheets</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- Tambahkan ini untuk CSS sidebar -->
+    <link rel="stylesheet" href="/assets/css/sidebar.css">
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- DataTables CSS dan JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <!-- FontAwesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css untuk animasi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tambahkan ini untuk CSS header -->
+    <link rel="stylesheet" href="/assets/css/header.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="main-header">
+        <div class="header-container">
+            <h1>Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <ul class="list-unstyled">
+            <li>
+                <a href="/index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#" class="toggle-submenu"><i class="fas fa-ticket"></i> Voucher <i class="fas fa-angle-down submenu-icon"></i></a>
+                <ul class="list-unstyled ms-3 submenu">
+                    <li><a href="/page/subpage1.html"><i class="fas fa-ticket"></i> Voucher Rp 2,000</a></li>
+                    <li><a href="/page/subpage2.html"><i class="fas fa-ticket"></i> Voucher Rp 3,000</a></li>
+                    <li><a href="/page/subpage3.html"><i class="fas fa-ticket"></i> Voucher Rp 5,000</a></li>
+                    <li><a href="/page/subpage4.html"><i class="fas fa-ticket"></i> Voucher Rp 15,000</a></li>
+                    <li><a href="/page/subpage5.html"><i class="fas fa-ticket"></i> Voucher Rp 40,000</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Konten utama -->
+    <div id="main-content" class="main-content">
+        <div class="dashboard-container">
+            <div class="info-box">
+                <div class="background-icon"><i class="fas fa-users"></i></div>
+                <div class="info-box-content">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Users</h3>
+                    <p>1,234</p>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="background-icon"><i class="fas fa-ticket-alt"></i></div>
+                <div class="info-box-content">
+                    <div class="icon"><i class="fas fa-ticket-alt"></i></div>
+                    <h3>Vouchers</h3>
+                    <p>567</p>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="background-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="info-box-content">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Sales</h3>
+                    <p>$12,345</p>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="background-icon"><i class="fas fa-comments"></i></div>
+                <div class="info-box-content">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h3>Feedbacks</h3>
+                    <p>89</p>
+                </div>
+            </div>
+        </div>
+        <div class="charts-container">
+            <div class="chart-container">
+                <canvas id="voucherChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script untuk Chart.js -->
+    <script src="/assets/js/chart.js"></script>
+    <script src="/assets/js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'login.html';
+            }
+
+            // Logout otomatis setelah 15 menit tidak ada aktivitas
+            let logoutTimer;
+
+            function resetLogoutTimer() {
+                clearTimeout(logoutTimer);
+                logoutTimer = setTimeout(logout, 15 * 60 * 1000); // 15 menit
+            }
+
+            function logout() {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
+            }
+
+            window.onload = resetLogoutTimer;
+            document.onmousemove = resetLogoutTimer;
+            document.onkeypress = resetLogoutTimer;
+        });
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
