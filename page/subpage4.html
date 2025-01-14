@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data dari Google Sheets</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- Tambahkan ini untuk CSS sidebar -->
+    <link rel="stylesheet" href="/assets/css/sidebar.css">
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- DataTables CSS dan JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <!-- FontAwesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css untuk animasi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Tambahkan ini untuk CSS header -->
+    <link rel="stylesheet" href="/assets/css/header.css">
+
+    
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="main-header">
+        <div class="header-container">
+            <h1>Peket Vouchers D</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <ul class="list-unstyled">
+            <li>
+                <a href="/index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#" class="toggle-submenu"><i class="fas fa-ticket"></i> Voucher <i class="fas fa-angle-down submenu-icon"></i></a>
+                <ul class="list-unstyled ms-3 submenu">
+                    <li><a href="/page/subpage1.html"><i class="fas fa-ticket"></i> Voucher Rp 2,000</a></li>
+                    <li><a href="/page/subpage2.html"><i class="fas fa-ticket"></i> Voucher Rp 3,000</a></li>
+                    <li><a href="/page/subpage3.html"><i class="fas fa-ticket"></i> Voucher Rp 5,000</a></li>
+                    <li><a href="/page/subpage4.html"><i class="fas fa-ticket"></i> Voucher Rp 15,000</a></li>
+                    <li><a href="/page/subpage5.html"><i class="fas fa-ticket"></i> Voucher Rp 40,000</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Pesan Pemuatan Data --> 
+    <div id="loadingMessage" class="modal">
+        <div class="modal-content preparing-data animate__animated animate__slideInDown">
+            <div class="spinner"></div>
+            <p><span class="typing-animation">Harap tunggu</span></p>
+        </div>
+    </div>
+
+    <!-- Konten utama -->
+    <div id="main-content" class="main-content main-content-page">
+        <h2 class="animate__animated animate__zoomIn">Peket Internet Vouchers D harga Rp 15,000 / 10 Hari</h2>
+        <button class="btn_upload" type="button"><i class="fas fa-upload"></i> Upload File</button>
+        <table id="data-table" class="display">
+            <thead>
+                <tr id="table-header"></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+        <!-- Sisa konten di sini -->
+    </div>
+    
+    <!-- Modal untuk Konfirmasi Pembelian -->
+    <div id="myModal" class="modal">
+        <div class="modal-content animate__animated animate__fadeInDown">
+            <span class="close"><i class="fas fa-times"></i></span>
+            <h2>Konfirmasi Pembelian</h2>
+            <table id="modal-table">
+                <tr><td>ID</td><td id="modal-id"></td></tr>
+                <tr><td>Kode 1</td><td id="modal-code1"></td></tr>
+                <tr><td>Kode 2</td><td id="modal-code2"></td></tr>
+                <tr><td>Harga</td><td id="modal-price"></td></tr>
+                <tr><td>Durasi</td><td id="modal-duration"></td></tr>
+                <tr><td>Status User</td><td id="modal-user-status"></td></tr>
+                <tr><td>Status Pembelian</td><td id="modal-purchase-status"></td></tr>
+            </table>
+            <button id="confirm-btn" type="button">Konfirmasi</button>
+            <button id="cancel-btn" type="button">Batal</button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Loading -->
+    <div id="loadingModal" class="modal">
+        <div class="modal-content animate__animated animate__fadeInDown">
+            <h2 class="animate__animated animate__pulse animate__infinite">Sedang di proses</h2>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Notifikasi Pembelian Berhasil -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close success-close"><i class="fas fa-times"></i></span>
+            <h2>Terima Kasih</h2>
+            <i class="fa-solid fa-circle-check animate__animated animate__heartBeat" style="color: green; font-size: 100px;"></i>
+            <p>Pembelian Berhasil!</p>
+            <button id="ok-btn" type="button">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Notifikasi Item Sudah Dibeli -->
+    <div id="alreadyPurchasedModal" class="modal">
+        <div class="modal-content">
+            <span class="close already-purchased-close"><i class="fas fa-times"></i></span>
+            <h2>Digunakan</h2>
+            <i class="fa-solid fa-circle-check animate__animated animate__heartBeat" style="color: red; font-size: 100px;"></i>
+            <p>Vouchers ini sudah dibeli.</p>
+            <button id="ok-already-purchased-btn" type="button">OK</button>
+        </div>
+    </div>
+
+    <!-- Memuat file JavaScript di akhir body --> 
+    <script src="/assets/js/loginpage.js"></script>
+    <script src="/assets/js/loadingMessage.js"></script>
+    <script src="/assets/js/subpage4.js"></script> 
+    <script src="/assets/js/script.js"></script>
+
+</body>
+</html>
