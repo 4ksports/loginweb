@@ -1,7 +1,7 @@
 // URL untuk mendapatkan data dari Google Sheets
-const sheetDataUrl = 'https://script.google.com/macros/s/AKfycbzc5OmBxPzwSdpDtffPayJdfxKntwoYg8xQQBiOHnWRsMTcjcGax9DMBA6YfKJh6J1c/exec?sheet=Vouchers_E';
+const sheetDataUrl = 'https://script.google.com/macros/s/AKfycbwf2AVs6Rpvk3z4G6cBumoUFm4wTChpWikh3O7e9wo5MuOBMChuoy2GRqk6xU7kphgm8Q/exec?sheet=Vouchers_E';
 // URL untuk memperbarui data di Google Sheets
-const sheetUpdateUrl = 'https://script.google.com/macros/s/AKfycbzc5OmBxPzwSdpDtffPayJdfxKntwoYg8xQQBiOHnWRsMTcjcGax9DMBA6YfKJh6J1c/exec?sheet=Vouchers_E';
+const sheetUpdateUrl = 'https://script.google.com/macros/s/AKfycbwf2AVs6Rpvk3z4G6cBumoUFm4wTChpWikh3O7e9wo5MuOBMChuoy2GRqk6xU7kphgm8Q/exec?sheet=Vouchers_E';
 let tableData = [];
 
 // Fungsi untuk memformat tanggal
